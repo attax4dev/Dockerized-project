@@ -48,12 +48,15 @@ public  class User {
   @JsonIgnoreProperties("user")
   private Service service;
 
-    public User(String name, String username, String email, String password, boolean b) {
+    public User(String name, String username, String email, String password, boolean b,String adresse,boolean isVerified,String diplome,Date date) {
         this.name=name;
         this.username=username;
         this.email=email;
         this.password=password;
-        this.isVerified=b;
+        this.adresse=adresse;
+        this.isVerified=isVerified;
+        this.diplome=diplome;
+        this.date=date;
     }
 
     public User() {

@@ -65,7 +65,7 @@ public class AuthRestAPIs {
         if(userRepository.existsByEmail(user1.getEmail())) {
             return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
         }
-        User user = new User(user1.getName(),user1.getUsername(),user1.getEmail(),passwordEncoder.encode(user1.getPassword()),false);
+        User user = new User(user1.getName(),user1.getUsername(),user1.getEmail(),passwordEncoder.encode(user1.getPassword()),false,user1.getAdresse(),user1.getIsVerified(),user1.getDiplome(),user1.getDate());
         Set<Role> roles = new HashSet<>();
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
@@ -94,6 +94,7 @@ public class AuthRestAPIs {
 
 
 
+/*
     @RequestMapping(value = "/signupprovaider", method = RequestMethod.POST)
     //@PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<User> registerProvaider(@Validated @RequestBody User user1)   {
@@ -128,7 +129,7 @@ public class AuthRestAPIs {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
-
+*/
 
 
 
@@ -150,7 +151,7 @@ public class AuthRestAPIs {
         }
     }
 
-
+/*
     @RequestMapping(value = "/signupadmin", method = RequestMethod.POST)
     public ResponseEntity<User> registerAdmin(@Validated @RequestBody User user)  {
         if(userRepository.existsByUsername(user.getUsername())) {
@@ -170,5 +171,5 @@ public class AuthRestAPIs {
         return new ResponseEntity<User>(user1, HttpStatus.OK);
     }
 
-
+*/
 }
