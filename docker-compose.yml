@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./Service
+      dockerfile: Dockerfile
+    image: Rest-project  
+    ports:
+      - '8081:8081'
+    depends_on:
+      - mysql-standalone-container
+# command: java -jar /studentRegistration/app.jar
+#    command: mvn spring-boot:run -Drun.jvmArguments="-Dserver.port=8080"
+
+  client:
+    build: 
+      context: ./admin_v2-master
+      dockerfile: Dockerfile
+    image: admin-react
+    volumes:
+      - ./sr-client:/usr/src/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - web
+    command: npm start
+  client2:
+    build: 
+      context: ./proj_pro-master
+      dockerfile: Dockerfile
+    image: admin-react
+    volumes:
+      - ./sr-client:/usr/src/app
+    ports:
+      - '3001:3001'
+    depends_on:
+      - web
+    command: npm start
+  mysql-standalone-container:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=BDSS1
+      - MYSQL_USER=root
+    volumes:
+      - /data/mysql
